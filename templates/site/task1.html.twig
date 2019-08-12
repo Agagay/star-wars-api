@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Тестовое задание: 1{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>1. Список планет с характеристиками и жителями</h1>
+
+    Решение:
+    <table>
+        <tr>
+            <th>name</th>
+            <th>rotation_period</th>
+            <th>orbital_period</th>
+            <th>diameter</th>
+            <th>climate</th>
+            <th>gravity</th>
+            <th>terrain</th>
+            <th>surface_water</th>
+            <th>population</th>
+        </tr>
+        {% for planet in planets  %}
+            <tr>
+                <td>{{ planet.name }}</td>
+                <td>{{ planet.rotationperiod }}</td>
+                <td>{{ planet.orbitalperiod }}</td>
+                <td>{{ planet.diameter }}</td>
+                <td>{{ planet.climate }}</td>
+                <td>{{ planet.gravity }}</td>
+                <td>{{ planet.terrain }}</td>
+                <td>{{ planet.surfacewater }}</td>
+                <td>{{ planet.population }}</td>
+                <td>
+                {% for resident in planet.people %}
+                    <p>{{ resident.name }}</p>
+                {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
