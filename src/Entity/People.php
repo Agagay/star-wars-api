@@ -172,10 +172,10 @@ class People
     /**
      * @return Collection|Planet[]
      */
-    public function getPlanets(): Collection
-    {
-        return $this->planets;
-    }
+//    public function getPlanets(): Collection
+//    {
+//        return $this->planets;
+//    }
 
     public function addPlanet(Planet $planet): self
     {
