@@ -22,8 +22,6 @@ class PlanetRestController extends AbstractFOSRestController
     public function getOne($id, Request $request): View
     {
         $planet = $this->getDoctrine()->getRepository(Planet::class)->find($id);
-//        $this->articleRepository->save($article);
-        // In case our POST was a success we need to return a 201 HTTP CREATED response
         return View::create($planet, Response::HTTP_OK);
     }
 
@@ -37,8 +35,6 @@ class PlanetRestController extends AbstractFOSRestController
     public function getAll(Request $request): View
     {
         $planet = $this->getDoctrine()->getRepository(Planet::class)->findAll();
-//        $this->articleRepository->save($article);
-        // In case our POST was a success we need to return a 201 HTTP CREATED response
         return View::create($planet, Response::HTTP_OK);
     }
 
