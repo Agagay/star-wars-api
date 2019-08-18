@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PlanetRepository")
@@ -20,46 +21,57 @@ class Planet
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank
      */
     private $rotation_period;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank
      */
     private $orbital_period;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
      */
     private $diameter;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\LessThan(255)
      */
     private $climate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\LessThan(255)
      */
     private $gravity;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $terrain;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank
      */
     private $surface_water;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
      */
     private $population;
 

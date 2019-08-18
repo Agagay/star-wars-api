@@ -8,6 +8,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PlanetRestController extends AbstractFOSRestController
 {
@@ -45,7 +46,7 @@ class PlanetRestController extends AbstractFOSRestController
      * @param Request $request
      * @return View
      */
-    public function add(Request $request): View
+    public function add(Request $request, ValidatorInterface $validator): View
     {
         $planet = new Planet();
         $planet->setPopulation($request->get('population'));
@@ -57,6 +58,13 @@ class PlanetRestController extends AbstractFOSRestController
         $planet->setGravity($request->get('gravity'));
         $planet->setTerrain($request->get('terrain'));
         $planet->setSurfaceWater($request->get('surface_water'));
+
+        $errors = $validator->validate($planet);
+
+        if (count($errors) > 0) {
+            return View::create($errors, Response::HTTP_BAD_REQUEST);
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($planet);
         $em->flush();
@@ -72,7 +80,7 @@ class PlanetRestController extends AbstractFOSRestController
      * @param Request $request
      * @return View
      */
-    public function edit($id, Request $request): View
+    public function edit($id, Request $request, ValidatorInterface $validator): View
     {
         $planet = $this->getDoctrine()->getRepository(Planet::class)->find($id);
 
@@ -85,6 +93,12 @@ class PlanetRestController extends AbstractFOSRestController
         $planet->setGravity($request->get('gravity'));
         $planet->setTerrain($request->get('terrain'));
         $planet->setSurfaceWater($request->get('surface_water'));
+
+        $errors = $validator->validate($planet);
+
+        if (count($errors) > 0) {
+            return View::create($errors, Response::HTTP_BAD_REQUEST);
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($planet);
